@@ -3,7 +3,7 @@
   "description": "Multi-agent SDLC orchestration for Claude Code — universal agents, commands, and skills for full software development lifecycle",
   "version": "1.0.0",
   "author": {
-    "name": "Yoh"
+    "name": "syanix"
   },
   "repository": "https://github.com/syanix/agentic-sdlc",
   "license": "MIT",
