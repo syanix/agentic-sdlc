@@ -1,0 +1,18 @@
+{
+  "name": "agentic-sdlc-marketplace",
+  "owner": {
+    "name": "Yoh"
+  },
+  "metadata": {
+    "description": "Multi-agent SDLC orchestration framework for Claude Code",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "agentic-sdlc",
+      "source": ".",
+      "description": "Multi-agent SDLC orchestration — 5 orchestration agents, 5 workflow commands, and domain skills for full software development lifecycle",
+      "version": "1.0.0"
+    }
+  ]
+}

@@ -107,4 +107,4 @@ When adding a new prompt:
 
 ## Licence
 
-Part of the agentic-coding-reference project. See the root README for licence details.
+Part of the agentic-sdlc project. See the root README for licence details.

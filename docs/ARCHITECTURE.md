@@ -176,7 +176,7 @@ Presets control which project-level components are generated:
 ## Directory Structure Overview
 
 ```
-agentic-coding-reference/
+agentic-sdlc/
 ├── .claude-plugin/
 │   └── plugin.json              # Plugin manifest
 ├── agents/                      # Plugin agents (universal)

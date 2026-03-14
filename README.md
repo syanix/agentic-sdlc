@@ -29,32 +29,30 @@ The result: Claude Code operates more like a coordinated development team than a
 
 ### Step 1: Install the Plugin
 
-**Option A: Development mode** (loads from local directory, ideal when actively developing the plugin):
+**Option A: Install from GitHub** (recommended — works for anyone):
 
-```bash
-claude --plugin-dir /path/to/agentic-coding-reference
+From within a Claude Code session:
+
 ```
-
-This loads the plugin directly for each session. Changes to plugin files take effect on next session (or use `/reload-plugins`).
-
-**Option B: Permanent installation** (global, all projects):
-
-```bash
-# Clone to any directory
-git clone https://github.com/yoh/agentic-coding-reference.git ~/www/agentic-sdlc
-
-# Add as a local marketplace, then install
-/plugin marketplace add ~/www/agentic-sdlc
+/plugin marketplace add yoh/agentic-sdlc
 /plugin install agentic-sdlc --scope user
 ```
 
-**Option C: Clone directly to plugins directory**:
+This installs globally — all projects get the 5 orchestration agents and 5 workflow commands.
+
+**Option B: Development mode** (for plugin contributors):
 
 ```bash
-git clone https://github.com/yoh/agentic-coding-reference.git ~/.claude/plugins/agentic-sdlc
+claude --plugin-dir /path/to/agentic-sdlc
 ```
 
-All options give every project access to the 5 universal orchestration agents and 5 workflow commands.
+Loads the plugin from a local clone for the current session. Changes take effect on next session (or use `/reload-plugins`).
+
+**Option C: Clone to plugins directory**:
+
+```bash
+git clone https://github.com/yoh/agentic-sdlc.git ~/.claude/plugins/agentic-sdlc
+```
 
 ### Step 2: Scaffold Your Project
 
@@ -364,7 +362,7 @@ See [docs/ADDING-A-STACK.md](docs/ADDING-A-STACK.md) for the complete guide. In 
 
 ### Reporting Issues
 
-Open an issue on [GitHub](https://github.com/yoh/agentic-coding-reference/issues) with:
+Open an issue on [GitHub](https://github.com/yoh/agentic-sdlc/issues) with:
 
 - Your stack combination (frontend, backend, database, testing)
 - Steps to reproduce
