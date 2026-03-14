@@ -23,6 +23,13 @@ Create a design system for **[PROJECT_NAME]** using **[FRAMEWORK]**.
 
 [COMPONENT_LIST]
 
+### Visual Identity Direction
+
+[AESTHETIC_DIRECTION] — e.g., "Midnight Terminal", "Warm Editorial", "Nordic Calm",
+or describe the desired aesthetic. See the `frontend-aesthetics` skill for curated
+theme recipes and font pairings. Avoid defaulting to generic palettes and safe font
+choices — commit to a distinctive visual direction before defining tokens.
+
 Build the design system in layers:
 
 1. **Token Foundation** - Define design tokens for colours, spacing, typography,

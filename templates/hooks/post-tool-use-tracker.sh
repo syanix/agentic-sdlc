@@ -13,7 +13,7 @@
 set -euo pipefail
 
 # Configuration
-SESSION_DIR="${CLAUDE_SESSION_DIR:-.claude/sessions}"
+SESSION_DIR="${CLAUDE_PROJECT_DIR:-.}/.claude/sessions"
 TRACKING_FILE="${SESSION_DIR}/modified-files.log"
 TIMESTAMP_FORMAT="%Y-%m-%dT%H:%M:%S%z"
 

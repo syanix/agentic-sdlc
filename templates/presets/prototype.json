@@ -4,5 +4,5 @@
   "agents": ["be-dev", "fe-dev"],
   "commands": ["create", "fix"],
   "skills": [],
-  "hooks": []
+  "hooks": ["pre-tool-use-guard"]
 }

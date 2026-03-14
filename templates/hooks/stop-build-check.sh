@@ -6,13 +6,13 @@
 # changes made during the session still produce a successful build.
 #
 # Usage: Called automatically via Stop hook in settings.json
-# Exit code: 0 if build passes, 1 if build fails
+# Exit code: 0 if build passes, 2 if build fails (blocking)
 
 set -euo pipefail
 
 # Configuration — these are replaced by the CLI scaffolder
 BUILD_COMMAND="${CLAUDE_BUILD_COMMAND:-npm run build}"
-PROJECT_ROOT="${CLAUDE_PROJECT_ROOT:-.}"
+PROJECT_ROOT="${CLAUDE_PROJECT_DIR:-.}"
 
 # Colours for output
 RED='\033[0;31m'
@@ -39,7 +39,16 @@ BUILD_OUTPUT=$(eval "${BUILD_COMMAND}" 2>&1) || {
     echo "${BUILD_OUTPUT}" | tail -20
     echo ""
     echo -e "${RED}[stop-build-check]${NC} The build is broken. Please review the changes made during this session."
-    exit 1
+
+    # Return structured JSON to tell Claude to fix the issue before completing
+    cat <<HOOK_EOF
+{
+  "decision": "block",
+  "reason": "Build failed with exit code ${BUILD_EXIT_CODE}. Last 20 lines of output:\n$(echo "${BUILD_OUTPUT}" | tail -20 | python3 -c 'import json,sys; print(json.dumps(sys.stdin.read())[1:-1])')",
+  "continue": true
+}
+HOOK_EOF
+    exit 2
 }
 
 echo -e "${GREEN}[stop-build-check]${NC} Build passed successfully."

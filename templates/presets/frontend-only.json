@@ -4,5 +4,5 @@
   "agents": ["fe-dev", "fe-tester"],
   "commands": ["create", "fix", "test", "debug"],
   "skills": ["frontend-dev-guidelines"],
-  "hooks": ["post-tool-use-tracker", "stop-build-check"]
+  "hooks": ["pre-tool-use-guard", "post-tool-use-tracker", "stop-build-check", "pre-compact-context", "user-prompt-context"]
 }

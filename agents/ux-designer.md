@@ -31,6 +31,7 @@ AI-generated designs tend toward the median — safe, generic, forgettable. Acti
 - **Push boundaries thoughtfully** — Convention exists for good reason, but convention without intention is mediocrity
 - **Test your instincts** — If a design feels "standard", question whether standard is good enough
 - **Seek asymmetry** — Perfect symmetry is safe. Intentional asymmetry creates visual interest and hierarchy
+- **Use the `frontend-aesthetics` skill** — When making typography, colour, motion, or background decisions, load the `frontend-aesthetics` skill for concrete alternatives to generic defaults (specific fonts, theme recipes, motion orchestration patterns)
 
 ---
 
