@@ -29,13 +29,32 @@ The result: Claude Code operates more like a coordinated development team than a
 
 ### Step 1: Install the Plugin
 
-Clone this repository into your Claude Code plugins directory:
+**Option A: Development mode** (loads from local directory, ideal when actively developing the plugin):
+
+```bash
+claude --plugin-dir /path/to/agentic-coding-reference
+```
+
+This loads the plugin directly for each session. Changes to plugin files take effect on next session (or use `/reload-plugins`).
+
+**Option B: Permanent installation** (global, all projects):
+
+```bash
+# Clone to any directory
+git clone https://github.com/yoh/agentic-coding-reference.git ~/www/agentic-sdlc
+
+# Add as a local marketplace, then install
+/plugin marketplace add ~/www/agentic-sdlc
+/plugin install agentic-sdlc --scope user
+```
+
+**Option C: Clone directly to plugins directory**:
 
 ```bash
 git clone https://github.com/yoh/agentic-coding-reference.git ~/.claude/plugins/agentic-sdlc
 ```
 
-This gives every project access to the 5 universal orchestration agents and 5 workflow commands.
+All options give every project access to the 5 universal orchestration agents and 5 workflow commands.
 
 ### Step 2: Scaffold Your Project
 

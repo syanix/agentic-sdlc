@@ -3,6 +3,6 @@
   "description": "Backend-focused setup for API services, workers, and server-side applications",
   "agents": ["be-dev", "be-tester"],
   "commands": ["create", "fix", "test", "debug"],
-  "skills": ["backend-dev-guidelines"],
+  "skills": ["backend-dev-guidelines", "architecture-patterns", "database-guidelines"],
   "hooks": ["pre-tool-use-guard", "post-tool-use-tracker", "stop-build-check", "pre-compact-context", "user-prompt-context"]
 }

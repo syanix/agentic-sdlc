@@ -112,6 +112,50 @@ If a project needs to override a plugin agent (e.g., provide a custom `architect
 
 ---
 
+## MCP Server Permissions
+
+MCP servers require **two separate configuration steps** to work without prompts:
+
+### Step 1: Server Connection
+
+The MCP server must be configured so Claude Code can connect to it. This is done via:
+- User-level: `~/.claude/.mcp.json`
+- Project-level: `.mcp.json` in the project root
+- Plugin-level: `.mcp.json` in the plugin directory (auto-loaded when plugin is enabled)
+
+### Step 2: Tool Allow-List Entry
+
+Even with a connected server, every tool call will prompt for approval unless the server is added to the `permissions.allow` list in `settings.json`.
+
+```json
+{
+  "permissions": {
+    "allow": [
+      "mcp__playwright",
+      "mcp__context7",
+      "mcp__shadcn"
+    ]
+  }
+}
+```
+
+The prefix `mcp__<server-name>` matches **all tools** from that server. For example, `mcp__playwright` covers `mcp__playwright__browser_click`, `mcp__playwright__browser_navigate`, etc.
+
+### Common Pitfall
+
+If an MCP server is installed but every call still prompts for approval, the allow-list entry is missing. This is the most common cause of excessive permission prompts.
+
+### Where Each Step Belongs
+
+| Step | User Level | Project Level | Plugin Level |
+|------|:----------:|:-------------:|:------------:|
+| Server connection | ✓ (personal infra) | ✓ (shared servers) | ✓ (bundled) |
+| Allow-list entry | ✓ (always) | ✓ (project scoping) | ✗ (cannot set) |
+
+Plugins can bundle an MCP server connection but **cannot** add allow-list entries — the user must add those to their own `settings.json`.
+
+---
+
 ## CLAUDE.md Best Practices
 
 Whether user-level or project-level, keep your CLAUDE.md files:
