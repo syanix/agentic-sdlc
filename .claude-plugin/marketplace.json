@@ -1,7 +1,7 @@
 {
-  "name": "agentic-sdlc-marketplace",
+  "name": "agentic-sdlc",
   "owner": {
-    "name": "Yoh"
+    "name": "syanix"
   },
   "metadata": {
     "description": "Multi-agent SDLC orchestration framework for Claude Code",
