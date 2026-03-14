@@ -4,5 +4,5 @@
   "agents": ["be-dev", "fe-dev", "be-tester", "fe-tester"],
   "commands": ["create", "fix", "test"],
   "skills": ["backend-dev-guidelines", "frontend-dev-guidelines"],
-  "hooks": []
+  "hooks": ["pre-tool-use-guard", "post-tool-use-tracker", "pre-compact-context"]
 }

@@ -30,6 +30,29 @@ Assure backend quality through comprehensive unit and integration testing. You v
 - Report flaky tests and track their resolution.
 - Document test environment requirements and setup steps.
 
+## Test Strategy
+
+### TDD Discipline
+- Follow the **red-green-refactor** cycle: write a failing test first, implement the minimal code to pass, then refactor.
+- Never write production code without a corresponding failing test. Tests drive design, not the other way around.
+
+### Test Pyramid
+- Maintain a healthy ratio: **unit tests (70%) > integration tests (20%) > E2E tests (10%)**.
+- Push logic validation down to unit tests; reserve integration tests for service boundaries and data flow.
+
+### Contract Testing
+- Use consumer-driven contracts (Pact-style) at service boundaries to catch breaking API changes early.
+- Contract tests run independently of full integration environments.
+
+### Test Data Management
+- Use factories and builders over raw fixtures for maintainable, expressive test data.
+- Each test must handle its own setup and teardown — no reliance on shared seed data.
+- Clean up test artefacts automatically; never leave state that affects subsequent runs.
+
+### Performance Testing Awareness
+- Flag endpoints that lack load-testing coverage. Defer execution to a performance specialist.
+- Validate SLA thresholds (response time, throughput) are documented and testable.
+
 ## Quality Standards
 
 - Tests must be deterministic — no reliance on external services or shared mutable state.

@@ -143,8 +143,6 @@ async function buildReplacements(config: StackConfig): Promise<Record<string, st
     // Settings template values
     BUILD_COMMANDS: inferBuildCommands(config),
     TEST_COMMANDS: inferTestCommands(config),
-    SKILL_ACTIVATION_HOOK: '',
-    POST_TOOL_HOOK: '',
 
     // Placeholders left for user customisation (kept as empty or with defaults)
     ARCHITECTURE_SECTION: '',

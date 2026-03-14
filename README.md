@@ -29,13 +29,30 @@ The result: Claude Code operates more like a coordinated development team than a
 
 ### Step 1: Install the Plugin
 
-Clone this repository into your Claude Code plugins directory:
+**Option A: Install from GitHub** (recommended — works for anyone):
 
-```bash
-git clone https://github.com/yoh/agentic-coding-reference.git ~/.claude/plugins/agentic-sdlc
+From within a Claude Code session:
+
+```
+/plugin marketplace add yoh/agentic-sdlc
+/plugin install agentic-sdlc --scope user
 ```
 
-This gives every project access to the 5 universal orchestration agents and 5 workflow commands.
+This installs globally — all projects get the 5 orchestration agents and 5 workflow commands.
+
+**Option B: Development mode** (for plugin contributors):
+
+```bash
+claude --plugin-dir /path/to/agentic-sdlc
+```
+
+Loads the plugin from a local clone for the current session. Changes take effect on next session (or use `/reload-plugins`).
+
+**Option C: Clone to plugins directory**:
+
+```bash
+git clone https://github.com/yoh/agentic-sdlc.git ~/.claude/plugins/agentic-sdlc
+```
 
 ### Step 2: Scaffold Your Project
 
@@ -345,7 +362,7 @@ See [docs/ADDING-A-STACK.md](docs/ADDING-A-STACK.md) for the complete guide. In 
 
 ### Reporting Issues
 
-Open an issue on [GitHub](https://github.com/yoh/agentic-coding-reference/issues) with:
+Open an issue on [GitHub](https://github.com/yoh/agentic-sdlc/issues) with:
 
 - Your stack combination (frontend, backend, database, testing)
 - Steps to reproduce

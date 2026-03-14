@@ -3,6 +3,6 @@
   "description": "All agents, commands, skills, and hooks for complete SDLC coverage",
   "agents": ["be-dev", "fe-dev", "be-tester", "fe-tester"],
   "commands": ["create", "fix", "test", "debug"],
-  "skills": ["backend-dev-guidelines", "frontend-dev-guidelines"],
-  "hooks": ["post-tool-use-tracker", "stop-build-check"]
+  "skills": ["backend-dev-guidelines", "frontend-dev-guidelines", "architecture-patterns", "database-guidelines"],
+  "hooks": ["pre-tool-use-guard", "post-tool-use-tracker", "stop-build-check", "pre-compact-context", "user-prompt-context"]
 }

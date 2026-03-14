@@ -131,6 +131,7 @@ Universal frontend development patterns and conventions. These principles apply 
 - Reference tokens via CSS variables or theme configuration
 - Maintain a single source of truth for the design system
 - Support dark mode via token swapping, not conditional classes
+- Choose distinctive typography and colour tokens intentionally — see the `frontend-aesthetics` skill for concrete alternatives to generic AI defaults
 
 ### Responsive Design
 - Design mobile-first, then enhance for larger screens

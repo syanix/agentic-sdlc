@@ -62,9 +62,9 @@ The remaining work splits into **5 independent streams** with zero file overlap.
 #### Instructions for this session
 
 ```
-You are implementing the CLI scaffolder for the agentic-coding-reference project.
+You are implementing the CLI scaffolder for the agentic-sdlc project.
 
-Working directory: /Users/yoh/www/agentic-coding-reference
+Working directory: /Users/yoh/www/agentic-sdlc
 
 Key design decisions:
 - The CLI composes agent files by combining _base/ role definitions with _stacks/ tech instructions
@@ -138,9 +138,9 @@ Reference existing P0 templates for format/style:
 #### Instructions for this session
 
 ```
-You are writing tech-stack template files for the agentic-coding-reference project.
+You are writing tech-stack template files for the agentic-sdlc project.
 
-Working directory: /Users/yoh/www/agentic-coding-reference
+Working directory: /Users/yoh/www/agentic-sdlc
 
 Read the existing P0 templates first to match their format and style:
 - templates/agents/_stacks/backend/nestjs.md
@@ -263,9 +263,9 @@ works-with: [relevant agents/commands]
 #### Instructions for this session
 
 ```
-You are writing the prompt library for the agentic-coding-reference project.
+You are writing the prompt library for the agentic-sdlc project.
 
-Working directory: /Users/yoh/www/agentic-coding-reference
+Working directory: /Users/yoh/www/agentic-sdlc
 
 Write all 44 files in the prompts/ directory. Each prompt should be:
 - Practical and immediately usable (not theoretical)
@@ -351,9 +351,9 @@ Write ALL files. Do NOT commit.
 #### Instructions for this session
 
 ```
-You are writing documentation for the agentic-coding-reference project.
+You are writing documentation for the agentic-sdlc project.
 
-Working directory: /Users/yoh/www/agentic-coding-reference
+Working directory: /Users/yoh/www/agentic-sdlc
 
 Read existing files to ensure accurate cross-references:
 - .claude-plugin/plugin.json (plugin name and metadata)
@@ -418,9 +418,9 @@ Each example is a complete `.claude/` directory showing what the CLI scaffolder 
 #### Instructions for this session
 
 ```
-You are creating example output for the agentic-coding-reference CLI scaffolder.
+You are creating example output for the agentic-sdlc CLI scaffolder.
 
-Working directory: /Users/yoh/www/agentic-coding-reference
+Working directory: /Users/yoh/www/agentic-sdlc
 
 Each example shows what a generated .claude/ directory looks like for a specific
 tech stack combination. The key task is COMPOSING base templates with stack templates
