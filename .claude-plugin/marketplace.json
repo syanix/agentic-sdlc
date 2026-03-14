@@ -10,7 +10,10 @@
   "plugins": [
     {
       "name": "agentic-sdlc",
-      "source": ".",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/syanix/agentic-sdlc.git"
+      },
       "description": "Multi-agent SDLC orchestration — 5 orchestration agents, 5 workflow commands, and domain skills for full software development lifecycle",
       "version": "1.0.0"
     }
