@@ -34,7 +34,7 @@ The result: Claude Code operates more like a coordinated development team than a
 From within a Claude Code session:
 
 ```
-/plugin marketplace add yoh/agentic-sdlc
+/plugin marketplace add syanix/agentic-sdlc
 /plugin install agentic-sdlc --scope user
 ```
 
@@ -51,7 +51,7 @@ Loads the plugin from a local clone for the current session. Changes take effect
 **Option C: Clone to plugins directory**:
 
 ```bash
-git clone https://github.com/yoh/agentic-sdlc.git ~/.claude/plugins/agentic-sdlc
+git clone https://github.com/syanix/agentic-sdlc.git ~/.claude/plugins/agentic-sdlc
 ```
 
 ### Step 2: Scaffold Your Project
@@ -362,7 +362,7 @@ See [docs/ADDING-A-STACK.md](docs/ADDING-A-STACK.md) for the complete guide. In 
 
 ### Reporting Issues
 
-Open an issue on [GitHub](https://github.com/yoh/agentic-sdlc/issues) with:
+Open an issue on [GitHub](https://github.com/syanix/agentic-sdlc/issues) with:
 
 - Your stack combination (frontend, backend, database, testing)
 - Steps to reproduce

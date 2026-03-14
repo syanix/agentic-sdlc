@@ -5,7 +5,7 @@
   "author": {
     "name": "Yoh"
   },
-  "repository": "https://github.com/yoh/agentic-sdlc",
+  "repository": "https://github.com/syanix/agentic-sdlc",
   "license": "MIT",
   "keywords": ["agents", "sdlc", "orchestration", "multi-agent", "commands", "skills"]
 }
