@@ -1,0 +1,39 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Glob",
+      "Grep",
+      "Edit",
+      "Write",
+      "Bash({{PACKAGE_MANAGER}}:*)",
+      "Bash({{BUILD_COMMANDS}})",
+      "Bash({{TEST_COMMANDS}})",
+      "Bash(git:*)"
+    ]
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{{SKILL_ACTIVATION_HOOK}}"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "{{POST_TOOL_HOOK}}"
+          }
+        ]
+      }
+    ]
+  }
+}

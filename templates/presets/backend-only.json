@@ -1,0 +1,8 @@
+{
+  "name": "Backend Only",
+  "description": "Backend-focused setup for API services, workers, and server-side applications",
+  "agents": ["be-dev", "be-tester"],
+  "commands": ["create", "fix", "test", "debug"],
+  "skills": ["backend-dev-guidelines"],
+  "hooks": ["post-tool-use-tracker", "stop-build-check"]
+}

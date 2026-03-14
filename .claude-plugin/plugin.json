@@ -1,0 +1,11 @@
+{
+  "name": "agentic-sdlc",
+  "description": "Multi-agent SDLC orchestration for Claude Code — universal agents, commands, and skills for full software development lifecycle",
+  "version": "1.0.0",
+  "author": {
+    "name": "Yoh"
+  },
+  "repository": "https://github.com/yoh/agentic-coding-reference",
+  "license": "MIT",
+  "keywords": ["agents", "sdlc", "orchestration", "multi-agent", "commands", "skills"]
+}

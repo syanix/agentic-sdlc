@@ -1,0 +1,8 @@
+{
+  "name": "Full SDLC",
+  "description": "All agents, commands, skills, and hooks for complete SDLC coverage",
+  "agents": ["be-dev", "fe-dev", "be-tester", "fe-tester"],
+  "commands": ["create", "fix", "test", "debug"],
+  "skills": ["backend-dev-guidelines", "frontend-dev-guidelines"],
+  "hooks": ["post-tool-use-tracker", "stop-build-check"]
+}

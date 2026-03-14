@@ -1,0 +1,8 @@
+{
+  "name": "Prototype",
+  "description": "Minimal setup for Supabase/Cloudflare rapid prototyping",
+  "agents": ["be-dev", "fe-dev"],
+  "commands": ["create", "fix"],
+  "skills": [],
+  "hooks": []
+}

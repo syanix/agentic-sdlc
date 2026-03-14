@@ -1,0 +1,205 @@
+# {{PROJECT_NAME}}
+
+## Tech Stack
+
+- **Frontend**: {{FRONTEND_FRAMEWORK}}
+- **Backend**: {{BACKEND_FRAMEWORK}}
+- **Database**: {{DATABASE_HOSTING}}
+- **Testing**: {{TESTING_FRAMEWORKS}}
+- **Package Manager**: {{PACKAGE_MANAGER}}
+- **Language**: {{LANGUAGE}}
+
+## Architecture
+
+{{ARCHITECTURE_SECTION}}
+
+<!-- Default architecture section if not provided:
+### Overview
+This project follows a {{ARCHITECTURE_PATTERN}} architecture pattern.
+
+### Key Design Decisions
+- Separation of concerns between frontend and backend
+- API-first design approach
+- Type safety enforced across the stack
+
+### Data Flow
+1. Client sends requests to the API layer
+2. API layer validates and processes requests
+3. Business logic is handled in service layers
+4. Data access is managed through repository/ORM patterns
+5. Responses are serialised and returned to the client
+-->
+
+## Development Commands
+
+{{DEV_COMMANDS}}
+
+<!-- Default development commands if not provided:
+### Common Commands
+```bash
+# Install dependencies
+{{PACKAGE_MANAGER}} install
+
+# Start development server
+{{PACKAGE_MANAGER}} run dev
+
+# Run tests
+{{PACKAGE_MANAGER}} test
+
+# Build for production
+{{PACKAGE_MANAGER}} run build
+
+# Lint and format
+{{PACKAGE_MANAGER}} run lint
+{{PACKAGE_MANAGER}} run format
+```
+
+### Database Commands
+```bash
+# Run migrations
+{{PACKAGE_MANAGER}} run db:migrate
+
+# Seed database
+{{PACKAGE_MANAGER}} run db:seed
+
+# Reset database
+{{PACKAGE_MANAGER}} run db:reset
+```
+-->
+
+## Code Style
+
+{{CODE_STYLE}}
+
+<!-- Default code style guidelines if not provided:
+### General
+- Use TypeScript strict mode where applicable
+- Prefer named exports over default exports
+- Use async/await over raw Promises
+- Favour composition over inheritance
+
+### Naming Conventions
+- **Files**: kebab-case (e.g., `user-service.ts`)
+- **Classes**: PascalCase (e.g., `UserService`)
+- **Functions/Variables**: camelCase (e.g., `getUserById`)
+- **Constants**: UPPER_SNAKE_CASE (e.g., `MAX_RETRY_COUNT`)
+- **Types/Interfaces**: PascalCase with descriptive names (e.g., `UserResponse`)
+
+### File Organisation
+- Group by feature/module, not by type
+- Keep files focused — one primary export per file
+- Co-locate tests with source files or in a parallel `__tests__` directory
+
+### Error Handling
+- Use custom error classes for domain-specific errors
+- Always handle promise rejections
+- Log errors with sufficient context for debugging
+- Return meaningful error messages to API consumers
+
+### Documentation
+- Document public APIs with JSDoc/TSDoc comments
+- Include usage examples for complex utilities
+- Keep comments focused on "why", not "what"
+-->
+
+## Project Structure
+
+{{PROJECT_STRUCTURE}}
+
+<!-- Default project structure if not provided:
+```
+├── src/
+│   ├── frontend/          # Frontend application
+│   │   ├── components/    # Reusable UI components
+│   │   ├── pages/         # Page-level components / routes
+│   │   ├── hooks/         # Custom hooks
+│   │   ├── services/      # API client services
+│   │   ├── stores/        # State management
+│   │   ├── types/         # Frontend-specific types
+│   │   └── utils/         # Frontend utilities
+│   ├── backend/           # Backend application
+│   │   ├── controllers/   # Request handlers
+│   │   ├── services/      # Business logic
+│   │   ├── models/        # Data models / entities
+│   │   ├── middleware/     # Custom middleware
+│   │   ├── types/         # Backend-specific types
+│   │   └── utils/         # Backend utilities
+│   └── shared/            # Shared types and utilities
+├── tests/
+│   ├── unit/              # Unit tests
+│   ├── integration/       # Integration tests
+│   └── e2e/               # End-to-end tests
+├── docs/                  # Project documentation
+├── scripts/               # Build and utility scripts
+└── .claude/               # Claude agent configuration
+    ├── agents/            # Project-specific agent definitions
+    ├── commands/          # Slash command definitions
+    ├── skills/            # Skill definitions
+    └── settings.json      # Permissions and hooks
+```
+-->
+
+## Agent Configuration
+
+This project uses the agentic-sdlc plugin for orchestration agents (task-orchestrator, architect, po, code-refactorer, ux-designer) and project-level agents for stack-specific work (be-dev, fe-dev, be-tester, fe-tester).
+
+See agent-registry.md for the complete agent hierarchy.
+
+### Agent Usage Guidelines
+
+- **task-orchestrator**: Use for multi-step tasks that require coordination across agents. It routes work to the appropriate specialist agent.
+- **architect**: Use for system design decisions, creating ADRs, and evaluating architectural trade-offs.
+- **po**: Use for writing user stories, acceptance criteria, and product documentation.
+- **be-dev / fe-dev**: Use for implementing features in their respective stack areas.
+- **be-tester / fe-tester**: Use for writing and maintaining tests.
+- **code-refactorer**: Use for improving code quality, reducing duplication, and applying design patterns.
+- **ux-designer**: Use for UI/UX design decisions and component design.
+
+### Delegation Rules
+
+- Orchestration agents (opus-tier) may delegate to project agents (sonnet-tier)
+- Project agents should not delegate to other project agents — escalate to the orchestrator instead
+- Always verify agent output before committing changes
+
+## Key Conventions
+
+{{CONVENTIONS}}
+
+<!-- Default conventions if not provided:
+### Git Workflow
+- Use conventional commits (e.g., `feat:`, `fix:`, `chore:`, `docs:`)
+- Keep commits atomic and focused on a single change
+- Write descriptive commit messages explaining the "why"
+- Never force push to shared branches
+
+### API Design
+- Follow RESTful conventions for HTTP APIs
+- Use consistent error response formats
+- Version APIs when introducing breaking changes
+- Validate all input at the API boundary
+
+### Testing
+- Write tests for all new features and bug fixes
+- Maintain minimum 80% code coverage for critical paths
+- Use descriptive test names that explain the expected behaviour
+- Mock external dependencies in unit tests
+- Use factories or fixtures for test data
+
+### Security
+- Never commit secrets, API keys, or credentials
+- Use environment variables for configuration
+- Validate and sanitise all user input
+- Follow the principle of least privilege for permissions
+
+### Performance
+- Optimise database queries — avoid N+1 patterns
+- Use pagination for list endpoints
+- Cache expensive computations where appropriate
+- Profile before optimising — measure, don't guess
+
+### Accessibility
+- Follow WCAG 2.1 AA guidelines for frontend work
+- Use semantic HTML elements
+- Ensure keyboard navigation works correctly
+- Provide appropriate ARIA labels where needed
+-->

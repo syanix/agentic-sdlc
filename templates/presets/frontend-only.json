@@ -1,0 +1,8 @@
+{
+  "name": "Frontend Only",
+  "description": "Frontend-focused setup for SPAs, static sites, and client-side applications",
+  "agents": ["fe-dev", "fe-tester"],
+  "commands": ["create", "fix", "test", "debug"],
+  "skills": ["frontend-dev-guidelines"],
+  "hooks": ["post-tool-use-tracker", "stop-build-check"]
+}
