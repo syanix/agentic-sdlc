@@ -1,8 +1,11 @@
-# Implementation Plan — Remaining Work
+# Implementation Plan
 
-> **Status**: Phase 1A + 1B complete (48 files). Phases 2-6 remain.
+> **Status**: All phases complete. CLI scaffolder, templates, documentation, and examples are done.
 > **Created**: 2026-03-14
-> **Strategy**: 5 parallel work streams that can run as independent Claude sessions.
+> **Updated**: 2026-03-14
+> **Strategy**: 5 parallel work streams that ran as independent Claude sessions.
+>
+> **Note**: Supabase (backend), Cloudflare Workers (backend), and Cloudflare D1 (database) were removed from CLI choices. The supported stack matrix is: Frontend (Next.js, Astro, React Vite), Backend (NestJS, Go, Python, .NET 10), Database (Neon, Supabase Postgres, Fly.io Postgres unmanaged).
 
 ---
 

@@ -168,7 +168,7 @@ function buildTestingLabel(config: StackConfig): string {
 
 function inferLanguage(config: StackConfig): string {
   const langs = new Set<string>();
-  if (['nestjs', 'supabase', 'cloudflare'].includes(config.backend)) langs.add('TypeScript');
+  if (['nestjs'].includes(config.backend)) langs.add('TypeScript');
   if (['nextjs', 'astro', 'react-vite'].includes(config.frontend)) langs.add('TypeScript');
   if (config.backend === 'go') langs.add('Go');
   if (config.backend === 'python') langs.add('Python');

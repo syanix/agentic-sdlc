@@ -1,6 +1,6 @@
 # agentic-sdlc
 
-A multi-agent orchestration framework for Claude Code that brings structured software development lifecycle (SDLC) workflows to AI-assisted development. It provides universal agents, composable project templates, and workflow commands that coordinate specialist AI agents across the full development lifecycle.
+A multi-agent orchestration framework for Claude Code that brings structured software development lifecycle (SDLC) workflows to AI-assisted development. Choose your own frontend, backend, and database stack during installation — the CLI generates tailored agent configurations for any supported combination.
 
 ---
 
@@ -17,9 +17,17 @@ The result: Claude Code operates more like a coordinated development team than a
 
 ---
 
-## Quick Start
+## Prerequisites
 
-### 1. Install the Plugin
+- [Claude Code CLI](https://docs.anthropic.com/en/docs/claude-code) installed and configured
+- Node.js 18+ (for the scaffolding CLI)
+- Git
+
+---
+
+## Installation
+
+### Step 1: Install the Plugin
 
 Clone this repository into your Claude Code plugins directory:
 
@@ -27,30 +35,51 @@ Clone this repository into your Claude Code plugins directory:
 git clone https://github.com/yoh/agentic-coding-reference.git ~/.claude/plugins/agentic-sdlc
 ```
 
-This gives you the 5 universal agents and 5 workflow commands in every project.
+This gives every project access to the 5 universal orchestration agents and 5 workflow commands.
 
-### 2. Scaffold a Project
+### Step 2: Scaffold Your Project
 
-Generate stack-specific agents and configuration for a new project:
+Navigate to your project directory and run the CLI. You choose your own stack combination — there are no fixed presets to be locked into.
+
+#### Interactive Mode (recommended for first-time use)
 
 ```bash
+cd ~/my-project
 npx create-agentic-project
 ```
 
-The interactive wizard asks for your frontend, backend, database, and testing choices, then generates a complete `.claude/` directory tailored to your stack.
+The wizard walks you through each choice:
 
-#### Non-Interactive Mode
+```
+🏗  Create Agentic Project
+Configure your Claude Code agent stack.
+
+? Backend framework:    › NestJS / Go (Gin/Echo) / Python (FastAPI) / .NET 10
+? Frontend framework:   › Next.js (App Router) / Astro / React (Vite)
+? Database hosting:     › Neon Postgres / Supabase Postgres / Fly.io Postgres (unmanaged)
+? E2E testing framework:› Playwright / Cypress
+? Agent preset:         › Full SDLC / Minimal / Prototype / Backend Only / Frontend Only
+```
+
+#### Non-Interactive Mode (CI/scripting)
+
+Pass your choices as flags to skip the wizard entirely:
 
 ```bash
 npx create-agentic-project \
-  --preset full-sdlc \
   --frontend nextjs \
-  --backend nestjs \
-  --database neon \
-  --testing jest,playwright
+  --backend dotnet \
+  --database flyio \
+  --testing-e2e playwright \
+  --preset full-sdlc
 ```
 
-### 3. Start Working
+Only `--frontend` and `--backend` are required. Other flags have sensible defaults:
+- `--database` defaults to Neon Postgres (or the only valid option for your backend)
+- `--testing-e2e` defaults to Playwright
+- `--preset` is inferred from your stack (full-sdlc for full-stack, backend-only/frontend-only when appropriate)
+
+### Step 3: Start Working
 
 Use the workflow commands in any Claude Code session:
 
@@ -61,6 +90,81 @@ Use the workflow commands in any Claude Code session:
 /analyze architecture
 /deploy staging
 ```
+
+---
+
+## Stack Combinations
+
+You can mix and match any frontend, backend, and database from the supported options below. The CLI validates compatibility and generates the correct agent configuration for your combination.
+
+### Available Choices
+
+| Category | Options |
+|----------|---------|
+| **Frontend** | Next.js (App Router), Astro, React (Vite), None |
+| **Backend API** | NestJS, Go (Gin/Echo), Python (FastAPI), .NET 10, None |
+| **Database** | Neon Postgres, Supabase Postgres, Fly.io Postgres (unmanaged), None |
+| **E2E Testing** | Playwright, Cypress, None |
+
+### Example Combinations
+
+Here are some common stack combinations you can create:
+
+```bash
+# Full-stack TypeScript: Next.js + NestJS + Neon
+npx create-agentic-project \
+  --frontend nextjs --backend nestjs --database neon
+
+# .NET API with React frontend on Fly.io
+npx create-agentic-project \
+  --frontend react-vite --backend dotnet --database flyio
+
+# Python FastAPI with Astro frontend on Supabase
+npx create-agentic-project \
+  --frontend astro --backend python --database supabase-db
+
+# Go microservice with Next.js frontend
+npx create-agentic-project \
+  --frontend nextjs --backend go --database neon
+
+# Backend-only Go API on Fly.io (no frontend)
+npx create-agentic-project \
+  --frontend none --backend go --database flyio
+
+# Frontend-only React SPA (no backend)
+npx create-agentic-project \
+  --frontend react-vite --backend none
+```
+
+### What Gets Generated
+
+Running the CLI produces a `.claude/` directory in your project:
+
+```
+your-project/
+├── CLAUDE.md                          # Project conventions (stack-specific)
+└── .claude/
+    ├── settings.json                  # Claude Code settings (allowed commands, etc.)
+    ├── agent-registry.md              # Agent capability map
+    ├── agents/
+    │   ├── be-dev.md                  # Backend developer (e.g. NestJS-specific)
+    │   ├── fe-dev.md                  # Frontend developer (e.g. Next.js-specific)
+    │   ├── be-tester.md               # Backend tester (e.g. Jest-specific)
+    │   └── fe-tester.md               # Frontend/E2E tester (e.g. Playwright-specific)
+    ├── commands/
+    │   ├── create.md                  # Scaffold new components/modules
+    │   ├── fix.md                     # Bug diagnosis and fixing
+    │   ├── test.md                    # Test generation/improvement
+    │   └── debug.md                   # Interactive debugging
+    ├── skills/
+    │   ├── backend-dev-guidelines/    # Stack-specific backend patterns
+    │   └── frontend-dev-guidelines/   # Stack-specific frontend patterns
+    └── hooks/
+        ├── post-tool-use-tracker.sh   # Track tool usage patterns
+        └── stop-build-check.sh        # Build validation on session end
+```
+
+Each agent file is composed from a base role template merged with stack-specific instructions. For example, `be-dev.md` for a NestJS project contains NestJS-specific patterns, while `be-dev.md` for a Go project contains Go idioms and conventions.
 
 ---
 
@@ -94,99 +198,68 @@ See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full design.
 
 ---
 
-## Supported Stacks
+## User Guide
 
-### Frontend
+### Workflow Commands
 
-| Framework | Template | Status |
-|-----------|----------|--------|
-| Next.js (App Router) | `templates/agents/_stacks/frontend/nextjs.md` | P0 — Complete |
-| Astro | `templates/agents/_stacks/frontend/astro.md` | P1 |
-| React (Vite) | `templates/agents/_stacks/frontend/react-vite.md` | P1 |
+These are available in every project once the plugin is installed:
 
-### Backend
+| Command | What It Does | When To Use |
+|---------|-------------|-------------|
+| `/feature <desc>` | Full-stack feature implementation through phased workflow (design → implement → test) | Starting a new feature or user story |
+| `/review [type]` | Code review — types: `standard`, `security`, `architecture`, `performance`, `full` | Before merging, after implementation |
+| `/improve [type]` | Code improvement — types: `quality`, `performance`, `types`, `architecture`, `tests` | Tech debt reduction, optimisation |
+| `/analyze [type]` | System analysis — types: `architecture`, `performance`, `security`, `quality`, `full` | Understanding system state, audits |
+| `/deploy [env]` | Pre-deployment validation — envs: `staging`, `production`, `preview` | Before deploying to any environment |
 
-| Framework | Template | Status |
-|-----------|----------|--------|
-| NestJS | `templates/agents/_stacks/backend/nestjs.md` | P0 — Complete |
-| Go (Gin/Echo) | `templates/agents/_stacks/backend/go.md` | P1 |
-| Python (FastAPI) | `templates/agents/_stacks/backend/python.md` | P1 |
-| Supabase | `templates/agents/_stacks/backend/supabase.md` | P1 |
-| .NET 10 | `templates/agents/_stacks/backend/dotnet.md` | P2 |
-| Cloudflare Workers | `templates/agents/_stacks/backend/cloudflare.md` | P2 |
+### Working with Agents
 
-### Database
+The task orchestrator automatically routes work to the right specialist agent. You can also address agents directly:
 
-| Hosting | Template | Status |
-|---------|----------|--------|
-| Neon Postgres | `templates/agents/_stacks/database/neon.md` | P0 — Complete |
-| Supabase Postgres | `templates/agents/_stacks/database/supabase-db.md` | P1 |
-| Fly.io Postgres | `templates/agents/_stacks/database/flyio.md` | P1 |
-| Cloudflare D1 | `templates/agents/_stacks/database/cloudflare-d1.md` | P2 |
+```
+# Let the orchestrator decide routing
+/feature Add password reset flow
 
-### Testing
+# Address a specific agent directly
+Use @architect to design the API contract for the payments service
+Use @be-dev to implement the user registration endpoint
+Use @fe-tester to add E2E tests for the checkout flow
+```
 
-| Framework | Template | Status |
-|-----------|----------|--------|
-| Jest | `templates/agents/_stacks/testing/jest.md` | P0 — Complete |
-| Playwright | `templates/agents/_stacks/testing/playwright.md` | P0 — Complete |
-| Vitest | `templates/agents/_stacks/testing/vitest.md` | P1 |
-| Go test | `templates/agents/_stacks/testing/go-test.md` | P1 |
-| pytest | `templates/agents/_stacks/testing/pytest.md` | P1 |
-| Cypress | `templates/agents/_stacks/testing/cypress.md` | P1 |
-| xUnit | `templates/agents/_stacks/testing/xunit.md` | P2 |
+### Agent Roster
 
----
+**Plugin Agents (universal — available in all projects):**
 
-## Agent Roster
+| Agent | Role |
+|-------|------|
+| `task-orchestrator` | Routes tasks to specialists, manages feedback loops and quality gates |
+| `architect` | System design, ADRs, architecture reviews, API contracts |
+| `po` | Product requirements, user stories, acceptance criteria, backlog |
+| `code-refactorer` | Code quality, tech debt reduction, performance optimisation |
+| `ux-designer` | UI/UX design, accessibility, micro-interactions, visual polish |
 
-### Plugin Agents (universal)
+**Project Agents (stack-specific — generated per project):**
 
-| Agent | Role | Model |
-|-------|------|-------|
-| `task-orchestrator` | Routes tasks to specialists, manages feedback loops and quality gates | opus |
-| `architect` | System design, ADRs, architecture reviews, API contracts | opus |
-| `po` | Product requirements, user stories, acceptance criteria, backlog | opus |
-| `code-refactorer` | Code quality, tech debt reduction, performance optimisation | opus |
-| `ux-designer` | UI/UX design, accessibility, micro-interactions, visual polish | opus |
+| Agent | Role |
+|-------|------|
+| `be-dev` | Backend implementation with stack-specific patterns |
+| `fe-dev` | Frontend implementation with framework-specific patterns |
+| `be-tester` | Backend unit/integration testing |
+| `fe-tester` | Frontend component testing + E2E testing |
 
-### Project Agents (stack-specific, generated)
+### Presets
 
-| Agent | Role | Generated From |
-|-------|------|---------------|
-| `be-dev` | Backend implementation | `_base/be-dev.md` + stack template |
-| `fe-dev` | Frontend implementation | `_base/fe-dev.md` + stack template |
-| `be-tester` | Backend testing | `_base/be-tester.md` + stack template |
-| `fe-tester` | Frontend/E2E testing | `_base/fe-tester.md` + stack template |
+Presets control which agents, commands, skills, and hooks are included in the generated project:
 
----
+| Preset | Use Case | What's Included |
+|--------|----------|-----------------|
+| **Full SDLC** | Full-stack projects | All 4 agents, all commands, all skills, all hooks |
+| **Minimal** | Getting started quickly | Core agents + essential commands, no hooks |
+| **Prototype** | Rapid prototyping | Dev agents only, minimal commands |
+| **Backend Only** | API services, microservices | Backend dev + tester, backend commands, all hooks |
+| **Frontend Only** | SPAs, static sites | Frontend dev + tester, frontend commands, all hooks |
 
-## Command Reference
-
-### Plugin Commands (universal)
-
-| Command | Purpose | Agent Routing |
-|---------|---------|--------------|
-| `/feature <desc>` | Full-stack feature implementation | Phased: architect+po → devs → testers |
-| `/review [type]` | Code review (standard, security, architecture, performance, full) | Parallel dispatch by type |
-| `/improve [type]` | Code improvement (quality, performance, types, architecture, tests) | Sequential chain by type |
-| `/analyze [type]` | System analysis (architecture, performance, security, quality, full) | Parallel dispatch by type |
-| `/deploy [env]` | Pre-deployment validation (staging, production, preview) | All agents in parallel → verdict |
-
-### Project Commands (generated)
-
-| Command | Purpose |
-|---------|---------|
-| `/create` | Scaffold new components, modules, or resources |
-| `/fix` | Diagnose and fix bugs or failing tests |
-| `/test` | Generate or improve tests for a target |
-| `/debug` | Start an interactive debugging session |
-
-See [commands/ROUTING_MAP.md](commands/ROUTING_MAP.md) for the complete routing decision tree.
-
----
-
-## Configuration Hierarchy
+### Configuration Hierarchy
 
 | Level | Location | Scope |
 |-------|----------|-------|
@@ -198,17 +271,49 @@ Project overrides plugin. Plugin overrides user defaults (for agents/commands).
 
 See [docs/CONFIGURATION-HIERARCHY.md](docs/CONFIGURATION-HIERARCHY.md) for details.
 
+### Customising After Generation
+
+The generated `.claude/` directory is yours to modify:
+
+- **CLAUDE.md** — Add project-specific conventions, architecture notes, coding standards
+- **Agent files** — Tweak agent instructions, add domain knowledge
+- **Skills** — Add or modify framework-specific guidelines
+- **Commands** — Customise project-level workflow commands
+
+Re-running `npx create-agentic-project` in a project with an existing `.claude/` directory will prompt before overwriting.
+
 ---
 
-## Presets
+## CLI Reference
 
-| Preset | Includes |
-|--------|----------|
-| **Full SDLC** | All agents, all commands, all hooks |
-| **Minimal** | Core agents + commands, no hooks |
-| **Prototype** | Dev agents only, minimal commands |
-| **Backend Only** | Backend dev + tester, all hooks |
-| **Frontend Only** | Frontend dev + tester, all hooks |
+```
+Usage: create-agentic-project [options]
+
+Scaffold a Claude Code agentic project with tech-stack-specific agents
+
+Options:
+  --frontend <framework>   Frontend: nextjs, astro, react-vite, none
+  --backend <framework>    Backend:  nestjs, go, python, dotnet, none
+  --database <hosting>     Database: neon, supabase-db, flyio, none
+  --testing-e2e <framework> E2E:    playwright, cypress, none
+  --preset <preset>        Preset:  full-sdlc, minimal, prototype, backend-only, frontend-only
+  --name <name>            Project name (defaults to directory name)
+  --target <dir>           Target directory (defaults to current directory)
+  -V, --version            Output version number
+  -h, --help               Display help
+```
+
+### Flag Details
+
+| Flag | Required | Default | Notes |
+|------|----------|---------|-------|
+| `--frontend` | Yes (with `--backend`) | — | Set to `none` for backend-only projects |
+| `--backend` | Yes (with `--frontend`) | — | Set to `none` for frontend-only projects |
+| `--database` | No | `neon` | Auto-selected based on backend if only one option is valid |
+| `--testing-e2e` | No | `playwright` | E2E testing framework |
+| `--preset` | No | Inferred | `full-sdlc` for full-stack, `backend-only`/`frontend-only` when appropriate |
+| `--name` | No | Directory name | Sanitised for use in configuration |
+| `--target` | No | Current directory | Where to write the `.claude/` directory |
 
 ---
 
@@ -234,7 +339,7 @@ See [docs/ADDING-A-STACK.md](docs/ADDING-A-STACK.md) for the complete guide. In 
 
 1. Create stack template(s) in `templates/agents/_stacks/`
 2. Create corresponding skill resources in `templates/skills/`
-3. Add the stack to the CLI wizard options
+3. Add the stack to `cli/presets.ts` (types, labels, mappings)
 4. Test composition produces clean output
 5. Submit a PR
 

@@ -8,8 +8,8 @@
 // ─── Stack Enums ───────────────────────────────────────────────────────
 
 export type FrontendFramework = 'nextjs' | 'astro' | 'react-vite' | 'none';
-export type BackendFramework = 'nestjs' | 'go' | 'python' | 'dotnet' | 'supabase' | 'cloudflare' | 'none';
-export type DatabaseHosting = 'neon' | 'supabase-db' | 'flyio' | 'cloudflare-d1' | 'none';
+export type BackendFramework = 'nestjs' | 'go' | 'python' | 'dotnet' | 'none';
+export type DatabaseHosting = 'neon' | 'supabase-db' | 'flyio' | 'none';
 export type TestingE2E = 'playwright' | 'cypress' | 'none';
 export type PresetName = 'full-sdlc' | 'minimal' | 'prototype' | 'backend-only' | 'frontend-only';
 
@@ -38,16 +38,13 @@ export const BACKEND_LABELS: Record<BackendFramework, string> = {
   go: 'Go (Gin/Echo)',
   python: 'Python (FastAPI)',
   dotnet: '.NET 10',
-  supabase: 'Supabase',
-  cloudflare: 'Cloudflare Workers',
   none: 'None',
 };
 
 export const DATABASE_LABELS: Record<DatabaseHosting, string> = {
   neon: 'Neon Postgres',
   'supabase-db': 'Supabase Postgres',
-  flyio: 'Fly.io Postgres',
-  'cloudflare-d1': 'Cloudflare D1',
+  flyio: 'Fly.io Postgres (unmanaged)',
   none: 'None',
 };
 
@@ -73,8 +70,6 @@ export const BACKEND_TESTING_MAP: Partial<Record<BackendFramework, string>> = {
   go: 'go-test',
   python: 'pytest',
   dotnet: 'xunit',
-  supabase: 'vitest',
-  cloudflare: 'vitest',
 };
 
 /** Maps frontend frameworks to their component testing stack template name. */
@@ -90,8 +85,6 @@ export const VALID_DATABASES: Record<BackendFramework, DatabaseHosting[]> = {
   go: ['neon', 'supabase-db', 'flyio'],
   python: ['neon', 'supabase-db', 'flyio'],
   dotnet: ['neon', 'supabase-db', 'flyio'],
-  supabase: ['supabase-db'],
-  cloudflare: ['cloudflare-d1', 'neon'],
   none: ['none'],
 };
 
@@ -101,8 +94,6 @@ export const BACKEND_STACK_PATH: Partial<Record<BackendFramework, string>> = {
   go: 'backend/go.md',
   python: 'backend/python.md',
   dotnet: 'backend/dotnet.md',
-  supabase: 'backend/supabase.md',
-  cloudflare: 'backend/cloudflare.md',
 };
 
 export const FRONTEND_STACK_PATH: Partial<Record<FrontendFramework, string>> = {
@@ -115,7 +106,6 @@ export const DATABASE_STACK_PATH: Partial<Record<DatabaseHosting, string>> = {
   neon: 'database/neon.md',
   'supabase-db': 'database/supabase-db.md',
   flyio: 'database/flyio.md',
-  'cloudflare-d1': 'database/cloudflare-d1.md',
 };
 
 export const TESTING_STACK_PATH: Record<string, string> = {
@@ -135,8 +125,6 @@ export const BACKEND_SKILL_STACKS: Partial<Record<BackendFramework, string>> = {
   go: 'go',
   python: 'python',
   dotnet: 'dotnet',
-  supabase: 'supabase',
-  cloudflare: 'cloudflare',
 };
 
 export const FRONTEND_SKILL_STACKS: Partial<Record<FrontendFramework, string>> = {
@@ -151,11 +139,5 @@ export const FRONTEND_SKILL_STACKS: Partial<Record<FrontendFramework, string>> =
 export function inferPreset(config: Omit<StackConfig, 'preset' | 'projectName'>): PresetName {
   if (config.frontend === 'none' && config.backend !== 'none') return 'backend-only';
   if (config.backend === 'none' && config.frontend !== 'none') return 'frontend-only';
-  if (
-    config.backend === 'supabase' ||
-    config.backend === 'cloudflare'
-  ) {
-    return 'prototype';
-  }
   return 'full-sdlc';
 }
