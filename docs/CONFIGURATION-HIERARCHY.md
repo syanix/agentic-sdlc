@@ -156,6 +156,87 @@ Plugins can bundle an MCP server connection but **cannot** add allow-list entrie
 
 ---
 
+## MCP Setup Guide
+
+MCP servers should be installed at the level that matches their scope. Most are installed via plugins; the guide below covers what to install and where.
+
+### Plugin-Bundled (automatic — just install the plugin)
+
+These MCP servers come bundled with their plugin. Installing the plugin auto-configures the server connection. You only need to add the allow-list entry to `~/.claude/settings.json`.
+
+| MCP Server | Plugin | Allow-List Entry | Used By |
+|-----------|--------|-----------------|---------|
+| context7 | `context7@claude-plugins-official` | `mcp__context7` | All agents — up-to-date library docs |
+| playwright | `playwright@claude-plugins-official` | `mcp__playwright` | fe-tester — E2E testing, screenshots |
+| supabase | `supabase@claude-plugins-official` | `mcp__supabase` | be-dev — Supabase projects only |
+| chrome-devtools | `chrome-devtools-mcp@claude-plugins-official` | `mcp__chrome-devtools` | fe-dev, fe-tester — browser inspection |
+| shadcn | `shadcn@claude-plugins-official` | `mcp__shadcn` | fe-dev, ux-designer — UI components |
+
+### User-Level (`~/.claude/.mcp.json`)
+
+For MCP servers you want in **every project** that are not bundled with a plugin. These are personal infrastructure — not committed to any repo.
+
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    }
+  }
+}
+```
+
+**Candidates for user-level:**
+- `sequential-thinking` — Structured reasoning, useful across all projects
+- `gitmcp` — GitHub repo documentation access (if not using context7)
+
+### Project-Level (`.mcp.json` in project root)
+
+For MCP servers that are **project-specific** — they need project-specific configuration (connection strings, API keys) and should be shared with the team.
+
+```json
+{
+  "mcpServers": {
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://user:pass@host:5432/dbname"
+      }
+    }
+  }
+}
+```
+
+**Candidates for project-level:**
+- `postgres` — Database connection is project-specific
+- Any project-specific API integrations (Stripe, Sentry, etc.)
+
+> **Security**: If your `.mcp.json` contains secrets (connection strings, API keys), add it to `.gitignore` and document the required config in your project's CLAUDE.md. Alternatively, use environment variable references that each developer sets locally.
+
+### What NOT to Put in the Plugin
+
+The agentic-sdlc plugin does **not** bundle MCP servers because:
+- MCP servers need runtime binaries and API keys that vary per machine
+- Plugins cannot add allow-list entries — users would still need to configure permissions manually
+- Most useful MCP servers are already available as installable plugins from the official marketplace
+
+### Quick Setup Checklist
+
+After installing agentic-sdlc, add these to `~/.claude/settings.json` under `permissions.allow` for any MCP servers you use:
+
+```json
+"mcp__context7",
+"mcp__playwright",
+"mcp__chrome-devtools",
+"mcp__shadcn",
+"mcp__sequential-thinking",
+"mcp__server-postgres"
+```
+
+---
+
 ## CLAUDE.md Best Practices
 
 Whether user-level or project-level, keep your CLAUDE.md files:

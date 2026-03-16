@@ -71,9 +71,9 @@ The wizard walks you through each choice:
 🏗  Create Agentic Project
 Configure your Claude Code agent stack.
 
-? Backend framework:    › NestJS / Go (Gin/Echo) / Python (FastAPI) / .NET 10
+? Backend framework:    › NestJS / Go (Gin/Echo) / Python (FastAPI) / .NET 10 / Cloudflare Workers
 ? Frontend framework:   › Next.js (App Router) / Astro / React (Vite)
-? Database hosting:     › Neon Postgres / Supabase Postgres / Fly.io Postgres (unmanaged)
+? Database hosting:     › Neon Postgres / Supabase Postgres / Fly.io Postgres (unmanaged) / Cloudflare D1
 ? E2E testing framework:› Playwright / Cypress
 ? Agent preset:         › Full SDLC / Minimal / Prototype / Backend Only / Frontend Only
 ```
@@ -119,8 +119,8 @@ You can mix and match any frontend, backend, and database from the supported opt
 | Category | Options |
 |----------|---------|
 | **Frontend** | Next.js (App Router), Astro, React (Vite), None |
-| **Backend API** | NestJS, Go (Gin/Echo), Python (FastAPI), .NET 10, None |
-| **Database** | Neon Postgres, Supabase Postgres, Fly.io Postgres (unmanaged), None |
+| **Backend API** | NestJS (Prisma), Go (Gin/Echo), Python (FastAPI), .NET 10, Cloudflare Workers (Hono + Drizzle), None |
+| **Database** | Neon Postgres, Supabase Postgres, Fly.io Postgres (unmanaged), Cloudflare D1 (SQLite edge), None |
 | **E2E Testing** | Playwright, Cypress, None |
 
 ### Example Combinations
@@ -143,6 +143,10 @@ npx create-agentic-project \
 # Go microservice with Next.js frontend
 npx create-agentic-project \
   --frontend nextjs --backend go --database neon
+
+# Lightweight Astro content site on Cloudflare Workers + D1
+npx create-agentic-project \
+  --frontend astro --backend cloudflare --database cloudflare-d1
 
 # Backend-only Go API on Fly.io (no frontend)
 npx create-agentic-project \
@@ -310,8 +314,8 @@ Scaffold a Claude Code agentic project with tech-stack-specific agents
 
 Options:
   --frontend <framework>   Frontend: nextjs, astro, react-vite, none
-  --backend <framework>    Backend:  nestjs, go, python, dotnet, none
-  --database <hosting>     Database: neon, supabase-db, flyio, none
+  --backend <framework>    Backend:  nestjs, go, python, dotnet, cloudflare, none
+  --database <hosting>     Database: neon, supabase-db, flyio, cloudflare-d1, none
   --testing-e2e <framework> E2E:    playwright, cypress, none
   --preset <preset>        Preset:  full-sdlc, minimal, prototype, backend-only, frontend-only
   --name <name>            Project name (defaults to directory name)
