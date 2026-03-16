@@ -166,7 +166,7 @@ function buildTestingLabel(config: StackConfig): string {
 
 function inferLanguage(config: StackConfig): string {
   const langs = new Set<string>();
-  if (['nestjs'].includes(config.backend)) langs.add('TypeScript');
+  if (['nestjs', 'cloudflare'].includes(config.backend)) langs.add('TypeScript');
   if (['nextjs', 'astro', 'react-vite'].includes(config.frontend)) langs.add('TypeScript');
   if (config.backend === 'go') langs.add('Go');
   if (config.backend === 'python') langs.add('Python');
@@ -179,6 +179,7 @@ function inferBuildCommands(config: StackConfig): string {
   if (config.backend === 'go') cmds.push('go build ./...');
   if (config.backend === 'python') cmds.push('python -m build');
   if (config.backend === 'dotnet') cmds.push('dotnet build');
+  if (config.backend === 'cloudflare') cmds.push('wrangler deploy --dry-run');
   return cmds.map((c) => `Bash(${c})`).join(',');
 }
 
@@ -187,6 +188,7 @@ function inferTestCommands(config: StackConfig): string {
   if (config.backend === 'go') cmds.push('go test ./...');
   if (config.backend === 'python') cmds.push('python -m pytest');
   if (config.backend === 'dotnet') cmds.push('dotnet test');
+  if (config.backend === 'cloudflare') cmds.push('npx vitest');
   if (config.testingE2E === 'playwright') cmds.push('npx playwright test');
   if (config.testingE2E === 'cypress') cmds.push('npx cypress run');
   return cmds.map((c) => `Bash(${c})`).join(',');
